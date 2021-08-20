@@ -25,10 +25,10 @@ var score = 0;
 var questionsIndex = 0;
 
 // declared variables
-var countDownEl = document.getElementById('countdown');
-var questionsEl = document.getElementById('questionsDiv');
-var startBtn = document.getElementById('start');
-var wrapperEl = document.getElementById('wrapper');
+var countDownEl = document.querySelector('#countdown');
+var questionsEl = document.querySelector('#questionsDiv');
+var startBtn = document.querySelector('#start');
+var wrapperEl = document.querySelector('#wrapper');
 
 // timer variables
 // 1o seconds per question
