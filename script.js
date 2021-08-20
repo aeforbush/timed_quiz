@@ -16,8 +16,9 @@ var questions = [
     answer: "a"
     },
 ];
-// start the game with a score of 0
-var score = 0
+// declared variables
+var score = 0;
+var questionIndex = 0;
 
 // loop over every question object
 for(var i=0; i<questions.length; i++) {
@@ -31,3 +32,32 @@ for(var i=0; i<questions.length; i++) {
     }
 };
 alert("You got" + score + "/" + questions.length);
+
+
+// declared variables
+var countDownEl = document.getElementById('countdown');
+var questionsEl = document.getElementById('questions');
+var startBtn = document.getElementById('start');
+var wrapperEl = document.getElementById('wrapper');
+
+// timer variables
+// 1o seconds per question
+var secondsLeft = 30;
+// penalty time
+var penalty = 10;
+
+
+// new element variable
+// create new element
+var ulCreate = document.createElement("ul");
+
+// start timer when button is clicked
+startBtn.addEventListener("click", function() {
+    if (secondsLeft <= 0) {
+        clearInterval(holdInterval);
+        allDone();
+        countDownEl.textContent = "Time's Up!";
+    }
+}, 1000);
+
+
