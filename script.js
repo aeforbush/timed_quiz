@@ -25,10 +25,10 @@ var score = 0;
 var questionsIndex = 0;
 
 // declared variables
-var countDownEl = document.querySelector('#countdown');
-var questionsEl = document.querySelector('#questionsDiv');
+var countDown = document.querySelector('#countdown');
+var questions = document.querySelector('#questionsDiv');
 var startBtn = document.querySelector('#start');
-var wrapperEl = document.querySelector('#wrapper');
+var wrapper = document.querySelector('#wrapper');
 
 // timer variables
 // 1o seconds per question
@@ -46,11 +46,11 @@ startBtn.addEventListener("click", function() {
     if (holdInterval === 0) {
         holdInterval = setInterval(function () {
             secondsLeft--;
-            currentTime.textContent = "Time: " + secondsLeft;
+            countDown.textContent = "Time: " + secondsLeft;
     if (secondsLeft <= 0) {
         clearInterval(holdInterval);
         allDone();
-        countDownEl.textContent = "Time's Up!";
+        countDown.textContent = "Time's Up!";
     }
 }, 1000);
 }
@@ -61,7 +61,7 @@ render(questionsIndex);
 // renders questions and answers to page
 function render(questionsIndex) {
     // clears existing data
-    questionsEl.innerHTML = "";
+    questions.innerHTML = "";
     ulCreate.innerHTML = "";
 
 // loop over every question object
@@ -111,7 +111,7 @@ function compare(event) {
 // allDone appends the last page
 function allDone() {
     questionsDiv.innerHTML = "";
-    countDownEl.innerHTML = "";
+    countDown.innerHTML = "";
 
     var createH1 = document.createElement('h1');
     createH1.setAttribute('id', 'createH1');
