@@ -8,15 +8,15 @@ var questions = [
     },
 
     {
-    question: "The link for the CSS stylesheet goes in the ____ of an HTML document."
+    question: "The link for the CSS stylesheet goes in the ____ of an HTML document.",
     choices: ["In the Head", "In the Footer", "In a Div"],
     answer: "In the Head"
     },
 
     {
-    question: "JavaScript has ___ Primitive Types?"
-    choices: [6, 7, 4],
-    answer: "6"
+    question: "The Primitive Types are?",
+    choices: ["String", "Number", "Boolean", "Null", "Undefined", "Symbol", "All of the above"],
+    answer: "All of the above"
     },
 
 ];
@@ -106,7 +106,86 @@ function compare(event) {
         render(questionsIndex);
     }
     questionsDiv.appendChild(createDiv);
+};
+
+// allDone appends the last page
+function allDone() {
+    questionsDiv.innerHTML = "";
+    countDownEl.innerHTML = "";
+
+    var createH1 = document.createElement('h1');
+    createH1.setAttribute('id', 'createH1');
+    createH1.textContent = "ALL DONE"
+
+    questionsDiv.appendChild(createH1);
+
+    // create p
+    var createP = document.createElement('p');
+    createP.setAttribute('id', "createP");
+
+    questionsDiv.appendChild(createP);
+
+    // calculates time remaining and replaces it with score
+    if (secondsLeft >= 0) {
+        var timeRemaining = secondsLeft;
+        var createP2 = document.createElement('p');
+        clearInterval(holdInterval);
+        createP.textContent = "Your final score is; " + timeRemaining;
+
+        questionsDiv.appendChild(createP2);
+    }
+
+    // create label
+    var createLabel = document.createElement('label');
+    createLabel.setAttribute('id', 'createLabel');
+    createLabel.textContent = "Enter your initials; ";
+
+    questionsDiv.appendChild(createInput);
+
+    // create input
+    var createInput = document.createElement('input');
+    createInput.setAttribute('type', 'text');
+    createInput.setAttribute('id', 'initials');
+    createInput.textContent = "";
+
+    questionsDiv.appendChild(createInput);
+
+    // create submit
+    var createSubmit = document.createElement('submit');
+    createSubmit.setAttribute('type', 'submit');
+    createSubmit.setAttribute('id', 'submit');
+    createSubmit.textContent = "submit";
+
+    questionsDiv.appendChild(createSubmit);
+
+// event listner to save initials and score in local storage
+
+    createSubmit.addEventListener('click', function() {
+        var initials = createInput.value;
+
+        if (initials === null) {
+            console.log('no value entered!');
+        } else {
+            var finalScore = {
+                initials: initials,
+                score: timeRemaining
+            }
+            console.log(finalScore);
+            var allScores = localStorage.getItem('allScores');
+            if (allScores === null) {
+                allScores = [];
+            } else {
+                allScores = JSON.parse(allScores);
+            }
+            allScores.push(finalScore);
+            var newScore = JSON.stringify(allScores);
+            localStorage.setItem('allScores', newScore);
+            window.location.replace("./highScores.html")
+        }
+    });
+    
 }
+
 
 
 
