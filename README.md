@@ -18,4 +18,4 @@
 * High score and initials are saved
 
 # App Image
-![](https://github.com/aeforbush/timed_quiz/blob/main/Screen%20Shot%202021-08-22%20at%2011.27.56%20AM.png)
+![](https://github.com/aeforbush/timed_quiz/blob/main/Screen%20Shot%202021-08-22%20at%2011.45.08%20AM.png)
