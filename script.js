@@ -2,7 +2,7 @@
 var questions = [
 
     {
-   question: "What does HTMl stand for?",
+   question: "What does HTML stand for?",
    choices: ["Hierarchy Text Markup Langauge", "Hypertext Markup Language", "Hypertropic Markup Language" ],
    answer: "Hypertext Markup Language"
     },
@@ -25,24 +25,23 @@ var score = 0;
 var questionsIndex = 0;
 
 // declared variables
-var countDown = document.querySelector('#countdown');
-var questions = document.querySelector('#questionsDiv');
-var startBtn = document.querySelector('#start');
+var countDown = document.querySelector('#countDown');
+var questionsDiv = document.querySelector('#questionsDiv');
+var timer = document.querySelector('#startTimer');
 var wrapper = document.querySelector('#wrapper');
 
 // timer variables
 // 1o seconds per question
 var secondsLeft = 30;
+// interval hold time
+var holdInterval = 0;
 // penalty time
 var penalty = 10;
-
-
-// new element variable
 // create new element
 var ulCreate = document.createElement("ul");
 
 // start timer when button is clicked
-startBtn.addEventListener("click", function() {
+timer.addEventListener("click", function() {
     if (holdInterval === 0) {
         holdInterval = setInterval(function () {
             secondsLeft--;
@@ -61,7 +60,7 @@ render(questionsIndex);
 // renders questions and answers to page
 function render(questionsIndex) {
     // clears existing data
-    questions.innerHTML = "";
+    questionsDiv.innerHTML = "";
     ulCreate.innerHTML = "";
 
 // loop over every question object
