@@ -3,7 +3,7 @@ var questions = [
 
     {
    question: "What does HTML stand for?",
-   choices: ["Hierarchy Text Markup Langauge", "Hypertext Markup Language", "Hypertropic Markup Language" ],
+   choices: ["Hierarchy Text Markup Langauge", "Hypertext Markup Language", "Hypertropic Markup Language"],
    answer: "Hypertext Markup Language"
     },
 
@@ -14,9 +14,9 @@ var questions = [
     },
 
     {
-    question: "The Primitive Types are?",
-    choices: ["String", "Number", "Boolean", "Null", "Undefined", "Symbol", "All of the above"],
-    answer: "All of the above"
+    question: "What does DOM stand for?",
+    choices: ["Document Orientation Model", "Document Object Main", "Document Object Model"],
+    answer: "Document Object Model"
     },
 
 ];
@@ -29,6 +29,7 @@ var countDown = document.querySelector('#countDown');
 var questionsDiv = document.querySelector('#questionsDiv');
 var timer = document.querySelector('#startTimer');
 var wrapper = document.querySelector('#wrapper');
+
 
 // timer variables
 // 1o seconds per question
@@ -66,18 +67,18 @@ function render(questionsIndex) {
 // loop over every question object
 for(var i=0; i<questions.length; i++) {
     var userQuestions = questions[questionsIndex].question;
-    var userAnswers = questions[questionsIndex].choices;
+    var userChoices = questions[questionsIndex].choices;
     questionsDiv.textContent = userQuestions;
 }
 // forEach for each question answer
-    userAnswers.forEAch(function(newItem) {
+    userChoices.forEach(function(newItem) {
         var listItem = document.createElement("li");
         listItem.textContent = newItem;
         questionsDiv.appendChild(ulCreate);
         ulCreate.appendChild(listItem);
         listItem.addEventListener("click", (compare));
     })
-};
+}
 
 // compare choices with answer
 function compare(event) {
@@ -92,7 +93,7 @@ function compare(event) {
         } else {
             // time deduction for wrong answer
             secondsLeft = secondsLeft - penalty;
-            createDiv.textContent = "Wrong!"
+            createDiv.textContent = "Wrong! The correct answer is:  " + questions[questionIndex].answer;
         }
     }
     // questionsIndex determines what number question a user is on
@@ -105,72 +106,73 @@ function compare(event) {
         render(questionsIndex);
     }
     questionsDiv.appendChild(createDiv);
-};
+}
 
 // allDone appends the last page
 function allDone() {
     questionsDiv.innerHTML = "";
     countDown.innerHTML = "";
 
-    var createH1 = document.createElement('h1');
-    createH1.setAttribute('id', 'createH1');
+    // create heading
+    var createH1 = document.createElement("h1");
+    createH1.setAttribute("id", "createH1");
     createH1.textContent = "ALL DONE"
 
     questionsDiv.appendChild(createH1);
 
-    // create p
-    var createP = document.createElement('p');
-    createP.setAttribute('id', "createP");
+    // create paragraph
+    var createP = document.createElement("p");
+    createP.setAttribute("id", "createP");
 
     questionsDiv.appendChild(createP);
 
     // calculates time remaining and replaces it with score
     if (secondsLeft >= 0) {
         var timeRemaining = secondsLeft;
-        var createP2 = document.createElement('p');
+        var createP2 = document.createElement("p");
         clearInterval(holdInterval);
-        createP.textContent = "Your final score is; " + timeRemaining;
+        createP.textContent = "Your final score is: " + timeRemaining;
 
         questionsDiv.appendChild(createP2);
     }
 
     // create label
-    var createLabel = document.createElement('label');
-    createLabel.setAttribute('id', 'createLabel');
-    createLabel.textContent = "Enter your initials; ";
+    var createLabel = document.createElement("label");
+    createLabel.setAttribute("id", "createLabel");
+    createLabel.textContent = "Enter your initials: ";
 
-    questionsDiv.appendChild(createInput);
+    questionsDiv.appendChild(createLabel);
 
     // create input
-    var createInput = document.createElement('input');
-    createInput.setAttribute('type', 'text');
-    createInput.setAttribute('id', 'initials');
+    var createInput = document.createElement("input");
+    createInput.setAttribute("type", "text");
+    createInput.setAttribute("id", "initials");
     createInput.textContent = "";
 
     questionsDiv.appendChild(createInput);
 
     // create submit
-    var createSubmit = document.createElement('submit');
-    createSubmit.setAttribute('type', 'submit');
-    createSubmit.setAttribute('id', 'submit');
-    createSubmit.textContent = "submit";
+    var createSubmit = document.createElement("button");
+    createSubmit.setAttribute("type", "submit");
+    createSubmit.setAttribute("id", "Submit");
+    createSubmit.textContent = "Submit";
 
     questionsDiv.appendChild(createSubmit);
 
 // event listner to save initials and score in local storage
 
-    createSubmit.addEventListener('click', function() {
+    createSubmit.addEventListener("click", function() {
         var initials = createInput.value;
 
         if (initials === null) {
-            console.log('no value entered!');
+            console.log('Please enter initials!');
         } else {
             var finalScore = {
                 initials: initials,
                 score: timeRemaining
             }
             console.log(finalScore);
-            var allScores = localStorage.getItem('allScores');
+            var allScores = localStorage.getItem("allScores");
             if (allScores === null) {
                 allScores = [];
             } else {
@@ -178,12 +180,13 @@ function allDone() {
             }
             allScores.push(finalScore);
             var newScore = JSON.stringify(allScores);
-            localStorage.setItem('allScores', newScore);
+            localStorage.setItem("allScores", newScore);
             window.location.replace("./highScores.html")
         }
     });
     
 }
+
 
 
 
